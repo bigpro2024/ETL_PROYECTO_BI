@@ -1,0 +1,8 @@
+C:\Users\wonge\Desktop\2025-2\INTELIGENCIA DE NEGOCIOS\sesion5\UNFV.DMT_AW\UNFV.CuboAW\bin\Model.asdatabase
+C:\Users\wonge\Desktop\2025-2\INTELIGENCIA DE NEGOCIOS\sesion5\UNFV.DMT_AW\UNFV.CuboAW\bin\Model.deploymenttargets
+C:\Users\wonge\Desktop\2025-2\INTELIGENCIA DE NEGOCIOS\sesion5\UNFV.DMT_AW\UNFV.CuboAW\bin\Model.deploymentoptions
+C:\Users\wonge\Desktop\2025-2\INTELIGENCIA DE NEGOCIOS\sesion5\UNFV.DMT_AW\UNFV.CuboAW\obj\Development\UNFV.CuboAW.smproj.AssemblyReference.cache
+C:\Users\wonge\Desktop\2025-2\INTELIGENCIA DE NEGOCIOS\sesion5\UNFV.DMT_AW\UNFV.CuboAW\obj\Development\UNFV.CuboAW.smproj.CoreCompileInputs.cache
+C:\Users\wonge\Desktop\2025-2\INTELIGENCIA DE NEGOCIOS\sesion5\UNFV.DMT_AW\UNFV.CuboAW\obj\Development\Model.asdatabase
+C:\Users\wonge\Desktop\2025-2\INTELIGENCIA DE NEGOCIOS\sesion5\UNFV.DMT_AW\UNFV.CuboAW\obj\Development\Model.deploymentoptions
+C:\Users\wonge\Desktop\2025-2\INTELIGENCIA DE NEGOCIOS\sesion5\UNFV.DMT_AW\UNFV.CuboAW\obj\Development\Model.deploymenttargets

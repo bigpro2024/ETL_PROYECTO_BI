@@ -1,0 +1,1542 @@
+{
+  "name": "UNFVCuboAW",
+  "compatibilityLevel": 1200,
+  "model": {
+    "name": "Modelo",
+    "culture": "es-ES",
+    "dataSources": [
+      {
+        "name": "SqlServer DESKTOP-DLAABOG DWH_AW",
+        "connectionString": "Data Source=DESKTOP-DLAABOG;Persist Security Info=false;Provider=SQLNCLI11;Integrated Security=SSPI;Initial Catalog=DWH_AW",
+        "impersonationMode": "impersonateServiceAccount",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "SqlServer"
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "DimFecha",
+        "dataCategory": "Time",
+        "columns": [
+          {
+            "name": "FechaKey",
+            "dataType": "int64",
+            "sourceColumn": "FechaKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Fecha",
+            "dataType": "dateTime",
+            "isKey": true,
+            "sourceColumn": "Fecha",
+            "formatString": "dd/MM/yyyy",
+            "sourceProviderType": "DBTimeStamp",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"DateTimeCustom\"><DateTimes><DateTime LCID=\"3082\" Group=\"ShortDate\" FormatString=\"dd/MM/yyyy\" /></DateTimes></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Dia_Semana",
+            "dataType": "int64",
+            "sourceColumn": "Dia_Semana",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "Nombre_Dia_Semana",
+            "dataType": "string",
+            "sourceColumn": "Nombre_Dia_Semana",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Dia_Mes",
+            "dataType": "int64",
+            "sourceColumn": "Dia_Mes",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "Dia_Anio",
+            "dataType": "int64",
+            "sourceColumn": "Dia_Anio",
+            "sourceProviderType": "SmallInt"
+          },
+          {
+            "name": "Nombre_Mes",
+            "dataType": "string",
+            "sourceColumn": "Nombre_Mes",
+            "sortByColumn": "Mes_Anio",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Mes_Anio",
+            "dataType": "int64",
+            "sourceColumn": "Mes_Anio",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "Semana_Anio",
+            "dataType": "int64",
+            "sourceColumn": "Semana_Anio",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "Anio",
+            "dataType": "int64",
+            "sourceColumn": "Anio",
+            "sourceProviderType": "SmallInt"
+          },
+          {
+            "name": "Bimestre",
+            "dataType": "int64",
+            "sourceColumn": "Bimestre",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "Trimestre",
+            "dataType": "int64",
+            "sourceColumn": "Trimestre",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "Cuatrimestre",
+            "dataType": "int64",
+            "sourceColumn": "Cuatrimestre",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "Semestre",
+            "dataType": "int64",
+            "sourceColumn": "Semestre",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "Visible",
+            "dataType": "int64",
+            "sourceColumn": "Visible",
+            "sourceProviderType": "SmallInt"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DimFecha",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [GENERICO].[DimFecha].*   FROM [GENERICO].[DimFecha] ",
+              "dataSource": "SqlServer DESKTOP-DLAABOG DWH_AW"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": ".Anio_Actual",
+            "expression": [
+              "",
+              "CALCULATE(",
+              "    MAX(DimFecha[Anio]),",
+              "    FactSales",
+              ")"
+            ]
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Fechas",
+            "levels": [
+              {
+                "name": "Anio",
+                "ordinal": 0,
+                "column": "Anio"
+              },
+              {
+                "name": "Nombre_Mes",
+                "ordinal": 1,
+                "column": "Nombre_Mes"
+              },
+              {
+                "name": "Fecha",
+                "ordinal": 2,
+                "column": "Fecha"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [GENERICO].[DimFecha].*   FROM [GENERICO].[DimFecha] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "DimFecha"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "GENERICO"
+          }
+        ]
+      },
+      {
+        "name": "DimCurrency",
+        "columns": [
+          {
+            "name": "CurrencyKey",
+            "dataType": "int64",
+            "sourceColumn": "CurrencyKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "CurrencyRateID",
+            "dataType": "int64",
+            "sourceColumn": "CurrencyRateID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "CurrencyRateDate",
+            "dataType": "dateTime",
+            "sourceColumn": "CurrencyRateDate",
+            "formatString": "General Date",
+            "sourceProviderType": "DBTimeStamp"
+          },
+          {
+            "name": "FromCurrencyCode",
+            "dataType": "string",
+            "sourceColumn": "FromCurrencyCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "ToCurrencyCode",
+            "dataType": "string",
+            "sourceColumn": "ToCurrencyCode",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DimCurrency",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [Sales].[DimCurrency].*   FROM [Sales].[DimCurrency] ",
+              "dataSource": "SqlServer DESKTOP-DLAABOG DWH_AW"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [Sales].[DimCurrency].*   FROM [Sales].[DimCurrency] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "DimCurrency"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Sales"
+          }
+        ]
+      },
+      {
+        "name": "DimCustomer",
+        "columns": [
+          {
+            "name": "CustomerKey",
+            "dataType": "int64",
+            "sourceColumn": "CustomerKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "CustomerID",
+            "dataType": "int64",
+            "sourceColumn": "CustomerID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "AccountNumber",
+            "dataType": "string",
+            "sourceColumn": "AccountNumber",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "AddressID",
+            "dataType": "int64",
+            "sourceColumn": "AddressID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "FirstName",
+            "dataType": "string",
+            "sourceColumn": "FirstName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "MiddleName",
+            "dataType": "string",
+            "sourceColumn": "MiddleName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "LastName",
+            "dataType": "string",
+            "sourceColumn": "LastName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "EmailAddress",
+            "dataType": "string",
+            "sourceColumn": "EmailAddress",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "PhoneNumber",
+            "dataType": "string",
+            "sourceColumn": "PhoneNumber",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "AddressLine1",
+            "dataType": "string",
+            "sourceColumn": "AddressLine1",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "AddressLine2",
+            "dataType": "string",
+            "sourceColumn": "AddressLine2",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "City",
+            "dataType": "string",
+            "sourceColumn": "City",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "PostalCode",
+            "dataType": "string",
+            "sourceColumn": "PostalCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "StateProvinceCode",
+            "dataType": "string",
+            "sourceColumn": "StateProvinceCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "StateProvinceName",
+            "dataType": "string",
+            "sourceColumn": "StateProvinceName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "CountryRegionCode",
+            "dataType": "string",
+            "sourceColumn": "CountryRegionCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "CountryRegionName",
+            "dataType": "string",
+            "sourceColumn": "CountryRegionName",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DimCustomer",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [Sales].[DimCustomer].*   FROM [Sales].[DimCustomer] ",
+              "dataSource": "SqlServer DESKTOP-DLAABOG DWH_AW"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "titulo_DinamicoCountryRegionName",
+            "expression": [
+              "",
+              "VAR country =",
+              "DISTINCT(DimCustomer[CountryRegionName])",
+              "VAR country_S =",
+              "CONCATENATEX(country,DimCustomer[CountryRegionName],\" - \")",
+              "VAR CANTIDADTITULO =",
+              "COUNTROWS(country)",
+              " VAR TITULO =",
+              "IF(CANTIDADTITULO>4,\"Pareto en",
+              "base a las ciudades\", \"Pareto en base a",
+              "la ciudad \" &country_S)",
+              " RETURN",
+              " TITULO"
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [Sales].[DimCustomer].*   FROM [Sales].[DimCustomer] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "DimCustomer"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Sales"
+          }
+        ]
+      },
+      {
+        "name": "DimEmployee",
+        "columns": [
+          {
+            "name": "EmployeeKey",
+            "dataType": "int64",
+            "sourceColumn": "EmployeeKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "EmployeeID",
+            "dataType": "int64",
+            "sourceColumn": "EmployeeID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "NationalIDNumber",
+            "dataType": "string",
+            "sourceColumn": "NationalIDNumber",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "FirstName",
+            "dataType": "string",
+            "sourceColumn": "FirstName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "MiddleName",
+            "dataType": "string",
+            "sourceColumn": "MiddleName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "LastName",
+            "dataType": "string",
+            "sourceColumn": "LastName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "LoginID",
+            "dataType": "string",
+            "sourceColumn": "LoginID",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "JobTitle",
+            "dataType": "string",
+            "sourceColumn": "JobTitle",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "BirthDate",
+            "dataType": "dateTime",
+            "sourceColumn": "BirthDate",
+            "formatString": "General Date",
+            "sourceProviderType": "DBDate"
+          },
+          {
+            "name": "MaritalStatus",
+            "dataType": "string",
+            "sourceColumn": "MaritalStatus",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "HireDate",
+            "dataType": "dateTime",
+            "sourceColumn": "HireDate",
+            "formatString": "General Date",
+            "sourceProviderType": "DBDate"
+          },
+          {
+            "name": "SalariedFlag",
+            "dataType": "boolean",
+            "sourceColumn": "SalariedFlag",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "Boolean"
+          },
+          {
+            "name": "CurrentFlag",
+            "dataType": "boolean",
+            "sourceColumn": "CurrentFlag",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "Boolean"
+          },
+          {
+            "name": "EmailAddress",
+            "dataType": "string",
+            "sourceColumn": "EmailAddress",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "PhoneNumber",
+            "dataType": "string",
+            "sourceColumn": "PhoneNumber",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DimEmployee",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [Sales].[DimEmployee].*   FROM [Sales].[DimEmployee] ",
+              "dataSource": "SqlServer DESKTOP-DLAABOG DWH_AW"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [Sales].[DimEmployee].*   FROM [Sales].[DimEmployee] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "DimEmployee"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Sales"
+          }
+        ]
+      },
+      {
+        "name": "DimProduct",
+        "columns": [
+          {
+            "name": "ProductKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ProductID",
+            "dataType": "int64",
+            "sourceColumn": "ProductID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Name",
+            "dataType": "string",
+            "sourceColumn": "Name",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "ProductNumber",
+            "dataType": "string",
+            "sourceColumn": "ProductNumber",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Color",
+            "dataType": "string",
+            "sourceColumn": "Color",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "ListPrice",
+            "dataType": "decimal",
+            "sourceColumn": "ListPrice",
+            "formatString": "#,0.00 \"€\";-#,0.00 \"€\";#,0.00 \"€\"",
+            "sourceProviderType": "Currency",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"3082\" DisplayName=\"€ Español (España)\" Symbol=\"€\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Size",
+            "dataType": "string",
+            "sourceColumn": "Size",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Weight",
+            "dataType": "double",
+            "sourceColumn": "Weight",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "name": "Class",
+            "dataType": "string",
+            "sourceColumn": "Class",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Style",
+            "dataType": "string",
+            "sourceColumn": "Style",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "ProductSubcategoryID",
+            "dataType": "int64",
+            "sourceColumn": "ProductSubcategoryID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ProductCategoryID",
+            "dataType": "int64",
+            "sourceColumn": "ProductCategoryID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Subcategory",
+            "dataType": "string",
+            "sourceColumn": "Subcategory",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "Category",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DimProduct",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [Sales].[DimProduct].*   FROM [Sales].[DimProduct] ",
+              "dataSource": "SqlServer DESKTOP-DLAABOG DWH_AW"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [Sales].[DimProduct].*   FROM [Sales].[DimProduct] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "DimProduct"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Sales"
+          }
+        ]
+      },
+      {
+        "name": "FactSales",
+        "columns": [
+          {
+            "name": "SalesOrderID",
+            "dataType": "int64",
+            "sourceColumn": "SalesOrderID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "SalesOrderDetailID",
+            "dataType": "int64",
+            "sourceColumn": "SalesOrderDetailID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "CustomerKey",
+            "dataType": "int64",
+            "sourceColumn": "CustomerKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "EmployeeKey",
+            "dataType": "int64",
+            "sourceColumn": "EmployeeKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "CurrencyKey",
+            "dataType": "int64",
+            "sourceColumn": "CurrencyKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ProductKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "OrderDateKey",
+            "dataType": "int64",
+            "sourceColumn": "OrderDateKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "DueDateKey",
+            "dataType": "int64",
+            "sourceColumn": "DueDateKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ShipDateKey",
+            "dataType": "int64",
+            "sourceColumn": "ShipDateKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "SpecialOfferID",
+            "dataType": "int64",
+            "sourceColumn": "SpecialOfferID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "OrderQty",
+            "dataType": "int64",
+            "sourceColumn": "OrderQty",
+            "sourceProviderType": "SmallInt"
+          },
+          {
+            "name": "UnitPrice",
+            "dataType": "decimal",
+            "sourceColumn": "UnitPrice",
+            "formatString": "#,0.00 \"€\";-#,0.00 \"€\";#,0.00 \"€\"",
+            "sourceProviderType": "Currency",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"3082\" DisplayName=\"€ Español (España)\" Symbol=\"€\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "UnitPriceDiscount",
+            "dataType": "decimal",
+            "sourceColumn": "UnitPriceDiscount",
+            "formatString": "#,0.00 \"€\";-#,0.00 \"€\";#,0.00 \"€\"",
+            "sourceProviderType": "Currency",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"3082\" DisplayName=\"€ Español (España)\" Symbol=\"€\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "RevisionNumber",
+            "dataType": "int64",
+            "sourceColumn": "RevisionNumber",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "SalesOrderNumber",
+            "dataType": "string",
+            "sourceColumn": "SalesOrderNumber",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "PurchaseOrderNumber",
+            "dataType": "string",
+            "sourceColumn": "PurchaseOrderNumber",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "AccountNumber",
+            "dataType": "string",
+            "sourceColumn": "AccountNumber",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Status",
+            "dataType": "int64",
+            "sourceColumn": "Status",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "OnlineOrderFlag",
+            "dataType": "boolean",
+            "sourceColumn": "OnlineOrderFlag",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "sourceProviderType": "Boolean"
+          },
+          {
+            "name": "SubTotal",
+            "dataType": "decimal",
+            "sourceColumn": "SubTotal",
+            "formatString": "#,0.00 \"€\";-#,0.00 \"€\";#,0.00 \"€\"",
+            "sourceProviderType": "Currency",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"3082\" DisplayName=\"€ Español (España)\" Symbol=\"€\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "TaxAmt",
+            "dataType": "decimal",
+            "sourceColumn": "TaxAmt",
+            "formatString": "#,0.00 \"€\";-#,0.00 \"€\";#,0.00 \"€\"",
+            "sourceProviderType": "Currency",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"3082\" DisplayName=\"€ Español (España)\" Symbol=\"€\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Freight",
+            "dataType": "decimal",
+            "sourceColumn": "Freight",
+            "formatString": "#,0.00 \"€\";-#,0.00 \"€\";#,0.00 \"€\"",
+            "sourceProviderType": "Currency",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"3082\" DisplayName=\"€ Español (España)\" Symbol=\"€\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "FactSales",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [Sales].[FactSales].*   FROM [Sales].[FactSales] ",
+              "dataSource": "SqlServer DESKTOP-DLAABOG DWH_AW"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": ".Avg_SubTotal",
+            "expression": [
+              "",
+              "AVERAGE(FactSales[SubTotal])"
+            ]
+          },
+          {
+            "name": ".Sum_SubTotal",
+            "expression": [
+              "",
+              "SUM(FactSales[SubTotal])"
+            ]
+          },
+          {
+            "name": ".sum_TaxAmt",
+            "expression": [
+              "",
+              "SUM(FactSales[TaxAmt])"
+            ]
+          },
+          {
+            "name": ".Sum_Freight",
+            "expression": [
+              "",
+              "SUM(FactSales[Freight])"
+            ]
+          },
+          {
+            "name": ".OrderDate_Subtotal",
+            "expression": [
+              "",
+              "CALCULATE([.Sum_SubTotal],",
+              "USERELATIONSHIP(FactSales[OrderDateKey], DimFecha[FechaKey]))"
+            ]
+          },
+          {
+            "name": ".DueDate_Subtotal",
+            "expression": [
+              "",
+              "CALCULATE([.Sum_SubTotal],",
+              "USERELATIONSHIP(FactSales[DueDateKey], DimFecha[FechaKey]))"
+            ]
+          },
+          {
+            "name": ".ShipDate_Subtotal",
+            "expression": [
+              "",
+              "CALCULATE([.Sum_SubTotal],",
+              "USERELATIONSHIP(FactSales[ShipDateKey], DimFecha[FechaKey]))"
+            ]
+          },
+          {
+            "name": ".Subtotal_Anio_Actual",
+            "expression": [
+              "",
+              "var anio = [.Anio_Actual]",
+              "return",
+              "CALCULATE([.Sum_SubTotal],",
+              "DimFecha[Anio] = anio)"
+            ]
+          },
+          {
+            "name": ".Subtotal_Anio_prev-1l",
+            "expression": [
+              "",
+              "var anio = [.Anio_Actual] -1",
+              "return",
+              "CALCULATE([.Sum_SubTotal],",
+              "DimFecha[Anio] = anio)"
+            ]
+          },
+          {
+            "name": ".Subtotal_Anio_prev-2l",
+            "expression": [
+              "",
+              "var anio = [.Anio_Actual] -2",
+              "return",
+              "CALCULATE([.Sum_SubTotal],",
+              "DimFecha[Anio] = anio)"
+            ]
+          },
+          {
+            "name": ".Subtotal_Anio_prev-3l",
+            "expression": [
+              "",
+              "var anio = [.Anio_Actual] -3",
+              "return",
+              "CALCULATE([.Sum_SubTotal],",
+              "DimFecha[Anio] = anio)"
+            ]
+          },
+          {
+            "name": ".%var_SubTotal",
+            "expression": [
+              "",
+              "DIVIDE([.Subtotal_Anio_Actual] -",
+              "[.Subtotal_Anio_prev-1l],",
+              "[.Subtotal_Anio_prev-1l])"
+            ]
+          },
+          {
+            "name": ".%var_SubTotal1",
+            "expression": [
+              " DIVIDE(",
+              "[.Subtotal_Anio_Actual] -",
+              "[.Subtotal_Anio_prev-2l] ,",
+              "[.Subtotal_Anio_prev-2l])"
+            ]
+          },
+          {
+            "name": ".%var_SubTotal2",
+            "expression": [
+              " DIVIDE(",
+              "[.Subtotal_Anio_Actual] -",
+              "[.Subtotal_Anio_prev-3l] ,",
+              "[.Subtotal_Anio_prev-3l])"
+            ]
+          },
+          {
+            "name": ".Titulo_Compracion_anual",
+            "expression": [
+              "",
+              "CONCATENATE(\"Comparación Anual",
+              "\"&[.Anio_Actual], \" - \"&[.Anio_Actual]-1",
+              "&\" - \"&[.Anio_Actual]-2 &\" -",
+              "\"&[.Anio_Actual]-3)"
+            ]
+          },
+          {
+            "name": ".Titulo_Varianza",
+            "expression": [
+              " CONCATENATE(\"Año",
+              "\"&[.Anio_Actual], \" - \"&[.Anio_Actual]-",
+              "1) "
+            ]
+          },
+          {
+            "name": ".Titulo_Varianza1",
+            "expression": [
+              "",
+              "CONCATENATE(\"Año \"&[.Anio_Actual], \"",
+              "- \"&[.Anio_Actual]-2)"
+            ]
+          },
+          {
+            "name": ".Titulo_Varianza2",
+            "expression": [
+              "",
+              "CONCATENATE(\"Año \"&[.Anio_Actual], \"",
+              "- \"&[.Anio_Actual]-3) "
+            ]
+          },
+          {
+            "name": ".%Var_SubTotal_I",
+            "expression": [
+              "",
+              "var si = IF([.%var_SubTotal]<0, \"▼\",",
+              "\"▲\")",
+              "return",
+              "CONCATENATE(ROUND([.%var_SubTotal],5)*100, \"% \"&si)"
+            ]
+          },
+          {
+            "name": ".%Var_SubTotal1_I",
+            "expression": [
+              "",
+              "var si = IF([.%var_SubTotal1]<0, \"▼\",",
+              "\"▲\")",
+              "return",
+              "CONCATENATE(ROUND([.%var_SubTotal1],5)*100, \"% \"&si)"
+            ]
+          },
+          {
+            "name": ".%Var_SubTotal2_I",
+            "expression": [
+              "",
+              "var si = IF([.%var_SubTotal2]<0, \"▼\",",
+              "\"▲\")",
+              "return",
+              "CONCATENATE(ROUND([.%var_SubTotal2],5)*100, \"% \"&si)"
+            ]
+          },
+          {
+            "name": ".SubTotal_Ultimos_Dias_7",
+            "expression": [
+              "",
+              "VAR FechaMaxConDatos = ",
+              "    CALCULATE(MAX(DimFecha[FECHA]), FactSales)",
+              "RETURN",
+              "CALCULATE(",
+              "    [.Sum_SubTotal],",
+              "    DATESINPERIOD(",
+              "        DimFecha[FECHA],",
+              "        FechaMaxConDatos,",
+              "        -7,",
+              "        DAY",
+              "    )",
+              ")"
+            ]
+          },
+          {
+            "name": ".SubTotal_DueDate_Ultimos_Dias_7",
+            "expression": [
+              "",
+              "VAR FechaMaxConDatos = ",
+              "    CALCULATE(MAX(DimFecha[FECHA]), FactSales)",
+              "RETURN",
+              "CALCULATE(",
+              "    [.DueDate_Subtotal],",
+              "    DATESINPERIOD(",
+              "        DimFecha[FECHA],",
+              "        FechaMaxConDatos,",
+              "        -7,",
+              "        DAY",
+              "    )",
+              ")"
+            ]
+          },
+          {
+            "name": ".SubTotal_Ultimos_Dias_7_avg",
+            "expression": [
+              "",
+              "VAR FechaMaxConDatos = ",
+              "    CALCULATE(MAX(DimFecha[FECHA]), FactSales)",
+              "RETURN",
+              "CALCULATE(",
+              "    [.Avg_SubTotal],",
+              "    DATESINPERIOD(",
+              "        DimFecha[FECHA],",
+              "        FechaMaxConDatos,",
+              "        -7,",
+              "        DAY",
+              "    )",
+              ")"
+            ]
+          },
+          {
+            "name": ".Acumulado_Anual",
+            "expression": [
+              "",
+              "CALCULATE(",
+              "    [.Sum_SubTotal],",
+              "    DimFecha[Anio] = 2014",
+              ")"
+            ]
+          },
+          {
+            "name": ".%Pareto_Diagnostico",
+            "expression": [
+              "",
+              "VAR CurrentCitySales = [.Sum_SubTotal]",
+              "VAR TotalAllCities = CALCULATE([.Sum_SubTotal], ALLSELECTED(DimCustomer[City]))",
+              "RETURN",
+              "TotalAllCities"
+            ]
+          },
+          {
+            "name": ".%Pareto_SubTotal_City",
+            "expression": [
+              "",
+              "VAR TotalAllCities =",
+              "    CALCULATE(",
+              "        SUMX(VALUES(DimCustomer[City]), [.Sum_SubTotal]),",
+              "        ALLSELECTED(DimCustomer[City])",
+              "    )",
+              "VAR CurrentValue =",
+              "    MAXX(VALUES(DimCustomer[City]), [.Sum_SubTotal])",
+              "VAR Acumulado =",
+              "    CALCULATE(",
+              "        SUMX(VALUES(DimCustomer[City]), [.Sum_SubTotal]),",
+              "        FILTER(",
+              "            ALLSELECTED(DimCustomer[City]),",
+              "            [.Sum_SubTotal] >= CurrentValue",
+              "        )",
+              "    )",
+              "RETURN",
+              "DIVIDE(Acumulado, TotalAllCities)"
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [Sales].[FactSales].*   FROM [Sales].[FactSales] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "FactSales"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Sales"
+          }
+        ]
+      },
+      {
+        "name": "vw_DimCategory",
+        "columns": [
+          {
+            "name": "CategoryID",
+            "dataType": "int64",
+            "sourceColumn": "CategoryID",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "Category",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_DimCategory",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [Sales].[vw_DimCategory].*   FROM [Sales].[vw_DimCategory] ",
+              "dataSource": "SqlServer DESKTOP-DLAABOG DWH_AW"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [Sales].[vw_DimCategory].*   FROM [Sales].[vw_DimCategory] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_DimCategory"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Sales"
+          }
+        ]
+      },
+      {
+        "name": "vw_DimMonth",
+        "dataCategory": "Time",
+        "columns": [
+          {
+            "name": "FechaKey",
+            "dataType": "string",
+            "sourceColumn": "FechaKey",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Fecha",
+            "dataType": "dateTime",
+            "isKey": true,
+            "sourceColumn": "Fecha",
+            "formatString": "General Date",
+            "sourceProviderType": "DBDate"
+          },
+          {
+            "name": "Nombre_Mes",
+            "dataType": "string",
+            "sourceColumn": "Nombre_Mes",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Mes_Anio",
+            "dataType": "int64",
+            "sourceColumn": "Mes_Anio",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "Anio",
+            "dataType": "int64",
+            "sourceColumn": "Anio",
+            "sourceProviderType": "SmallInt"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_DimMonth",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [Sales].[vw_DimMonth].*   FROM [Sales].[vw_DimMonth] ",
+              "dataSource": "SqlServer DESKTOP-DLAABOG DWH_AW"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [Sales].[vw_DimMonth].*   FROM [Sales].[vw_DimMonth] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_DimMonth"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Sales"
+          }
+        ]
+      },
+      {
+        "name": "vw_FactSalesMonthCategory",
+        "columns": [
+          {
+            "name": "CategoryID",
+            "dataType": "int64",
+            "sourceColumn": "CategoryID",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "MontKey",
+            "dataType": "string",
+            "sourceColumn": "MontKey",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "SubTotal",
+            "dataType": "decimal",
+            "sourceColumn": "SubTotal",
+            "formatString": "#,0.00 \"€\";-#,0.00 \"€\";#,0.00 \"€\"",
+            "sourceProviderType": "Currency",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"3082\" DisplayName=\"€ Español (España)\" Symbol=\"€\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_FactSalesMonthCategory",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [Sales].[vw_FactSalesMonthCategory].*   FROM [Sales].[vw_FactSalesMonthCategory] ",
+              "dataSource": "SqlServer DESKTOP-DLAABOG DWH_AW"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [Sales].[vw_FactSalesMonthCategory].*   FROM [Sales].[vw_FactSalesMonthCategory] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_FactSalesMonthCategory"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Sales"
+          }
+        ]
+      },
+      {
+        "name": "vw_FactSalesGoals",
+        "columns": [
+          {
+            "name": "CategoryID",
+            "dataType": "int64",
+            "sourceColumn": "CategoryID",
+            "sourceProviderType": "BigInt"
+          },
+          {
+            "name": "MontKey",
+            "dataType": "int64",
+            "sourceColumn": "MontKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "SubTotal",
+            "dataType": "double",
+            "sourceColumn": "SubTotal",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "Escenario",
+            "dataType": "string",
+            "sourceColumn": "Escenario",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "vw_FactSalesGoals",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [Sales].[vw_FactSalesGoals].*   FROM [Sales].[vw_FactSalesGoals] ",
+              "dataSource": "SqlServer DESKTOP-DLAABOG DWH_AW"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": ".Sum_SubTotal_SalesGoals",
+            "expression": " SUM(vw_FactSalesGoals[SubTotal])"
+          },
+          {
+            "name": ".SubTotal_SalesGoals_Year",
+            "expression": [
+              " TOTALYTD([.Sum_SubTotal_SalesGoals],",
+              "vw_DimMonth[Fecha])"
+            ]
+          },
+          {
+            "name": ".SubTotal_SalesGoals_Year_1r",
+            "expression": [
+              "",
+              "CALCULATE(",
+              "    [.Sum_SubTotal_SalesGoals],",
+              "    SAMEPERIODLASTYEAR(vw_DimMonth[Fecha])",
+              ")"
+            ]
+          },
+          {
+            "name": ".%var_SalesGoals",
+            "expression": " DIVIDE([.SubTotal_SalesGoals_Year] - [.SubTotal_SalesGoals_Year_1r], [.SubTotal_SalesGoals_Year_1r])",
+            "kpi": {
+              "targetExpression": "1",
+              "statusGraphic": "Traffic Light - Single",
+              "statusExpression": [
+                "var x='vw_FactSalesGoals'[.%var_SalesGoals] return",
+                "            if(ISBLANK(x),BLANK(),",
+                "                    If(x<0.2,-1,",
+                "\t                If(x<0.8,0,1)",
+                "                )",
+                "            )",
+                "            "
+              ],
+              "annotations": [
+                {
+                  "name": "GoalType",
+                  "value": "StaticValue"
+                },
+                {
+                  "name": "KpiStatusType",
+                  "value": "Linear"
+                },
+                {
+                  "name": "KpiThresholdType",
+                  "value": "Absolute"
+                },
+                {
+                  "name": "KpiThresholdOrdering",
+                  "value": "Ascending"
+                },
+                {
+                  "name": "KpiThresholdCount",
+                  "value": "2"
+                },
+                {
+                  "name": "KpiThreshold_0",
+                  "value": "0.2"
+                },
+                {
+                  "name": "KpiThreshold_1",
+                  "value": "0.8"
+                }
+              ]
+            }
+          },
+          {
+            "name": ".%Pareto_Categoria",
+            "expression": [
+              "",
+              "VAR A = [.Sum_SubTotal_SalesGoals]",
+              "VAR B =",
+              "CALCULATE([.Sum_SubTotal_SalesGoals]",
+              ",ALLSELECTED(vw_DimCategory[Category])",
+              ")",
+              "VAR TOTAL =",
+              "DIVIDE(SUMX(",
+              "FILTER(",
+              "SUMMARIZE(",
+              "ALLSELECTED(",
+              "vw_DimCategory[Category]),",
+              "vw_DimCategory[Category],",
+              "\"PORC\",[.Sum_SubTotal_SalesGoals] ),",
+              "[PORC] >=A),",
+              "[PORC])",
+              ",B",
+              ")",
+              "RETURN",
+              "TOTAL"
+            ]
+          },
+          {
+            "name": "%Pareto_Categoria_Simple",
+            "expression": [
+              "",
+              "VAR TotalSales = ",
+              "    CALCULATE([.Sum_SubTotal_SalesGoals], ALLSELECTED(vw_DimCategory))",
+              "VAR CurrentSales = [.Sum_SubTotal_SalesGoals]",
+              "RETURN",
+              "IF(",
+              "    TotalSales > 0,",
+              "    CurrentSales / TotalSales,",
+              "    BLANK()",
+              ")"
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [Sales].[vw_FactSalesGoals].*   FROM [Sales].[vw_FactSalesGoals] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "vw_FactSalesGoals"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Sales"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "bd522c6b-68fd-4ac3-9d16-c8d9f3a987d1",
+        "fromTable": "FactSales",
+        "fromColumn": "DueDateKey",
+        "toTable": "DimFecha",
+        "toColumn": "FechaKey",
+        "isActive": false
+      },
+      {
+        "name": "c2a02942-eaeb-4b15-94d0-a5cb1f0ce566",
+        "fromTable": "FactSales",
+        "fromColumn": "ShipDateKey",
+        "toTable": "DimFecha",
+        "toColumn": "FechaKey",
+        "isActive": false
+      },
+      {
+        "name": "ccb0ed50-b8f6-40e9-9d98-2cc42badb1cc",
+        "fromTable": "FactSales",
+        "fromColumn": "OrderDateKey",
+        "toTable": "DimFecha",
+        "toColumn": "FechaKey"
+      },
+      {
+        "name": "61d4060b-a047-4d70-8513-9065db3a616f",
+        "fromTable": "FactSales",
+        "fromColumn": "CurrencyKey",
+        "toTable": "DimCurrency",
+        "toColumn": "CurrencyKey"
+      },
+      {
+        "name": "f1398a36-bcf9-4f2d-94cc-4968ed723477",
+        "fromTable": "FactSales",
+        "fromColumn": "CustomerKey",
+        "toTable": "DimCustomer",
+        "toColumn": "CustomerKey"
+      },
+      {
+        "name": "b1fb6c9c-8422-4fb7-8e6b-d8810c60df7b",
+        "fromTable": "FactSales",
+        "fromColumn": "EmployeeKey",
+        "toTable": "DimEmployee",
+        "toColumn": "EmployeeKey"
+      },
+      {
+        "name": "982511b3-b4bb-4750-9ee5-ec0ac63e1d25",
+        "fromTable": "FactSales",
+        "fromColumn": "ProductKey",
+        "toTable": "DimProduct",
+        "toColumn": "ProductKey"
+      },
+      {
+        "name": "4486d473-0467-4494-b915-271fa079e8cf",
+        "fromTable": "vw_FactSalesGoals",
+        "fromColumn": "CategoryID",
+        "toTable": "vw_DimCategory",
+        "toColumn": "CategoryID"
+      },
+      {
+        "name": "08bf659a-eeee-45ba-a85b-f46d7ec30ce6",
+        "fromTable": "vw_FactSalesMonthCategory",
+        "fromColumn": "CategoryID",
+        "toTable": "vw_DimCategory",
+        "toColumn": "CategoryID"
+      },
+      {
+        "name": "effb24c6-5c04-4e08-86be-78be2ef6afd1",
+        "fromTable": "vw_FactSalesGoals",
+        "fromColumn": "MontKey",
+        "toTable": "vw_DimMonth",
+        "toColumn": "FechaKey"
+      },
+      {
+        "name": "ebe0026c-b50c-4236-bb75-0dd9a8c7ecf4",
+        "fromTable": "vw_FactSalesMonthCategory",
+        "fromColumn": "MontKey",
+        "toTable": "vw_DimMonth",
+        "toColumn": "FechaKey"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "400"
+      }
+    ]
+  }
+}
